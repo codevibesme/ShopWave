@@ -59,7 +59,7 @@ const HomePage = () => {
       <div className="flex flex-col scale-90 justify-center bg-lookbook bg-cover bg-center min-h-screen px-10 text-center text-white my-6 z-20 tracking-widest">
         <h1 className='text-4xl text-white text-center font-bold my-4'>Spring 2023 Lookbook</h1>
         <h2 className='text-2xl text-white opacity-70 text-center font-normal mb-4 mx-auto w-2/4'>#BeOutside this season, walking to work or lounging in a park.</h2>
-        <button className='hover:border-white mx-auto border-slate-200 border-2 rounded-lg p-2 h-12 w-fit text-white text-xl  bg-none'>
+        <button className='hover:border-2 hover:border-white mx-auto border-slate-200 border rounded-lg p-2 h-12 w-fit text-white text-xl  bg-none'>
           Explore our lookbook!
         </button>
       </div>
@@ -72,7 +72,7 @@ const HomePage = () => {
         </div>
       </div>
       <div className='min-h-screen min-w-screen text-center flex z-20 justify-center p-12'>
-        <div className='text-2xl text-center text-blue-300 mx-auto font-normal mb-4 flex flex-col justify-center'>
+        <div className='text-2xl text-center text-green-950 mx-auto font-normal mb-4 flex flex-col justify-center'>
           <span className='text-green-900 text-4xl'>* * * * *</span><br/>
           "They have a very nice padding in the sole which makes it comfortable to wear for long periods of time and these shoes definitely fit very true to size."<br />
           <br />
@@ -94,7 +94,7 @@ const HomePage = () => {
         <h1 className='px-60 text-green-950 text-4xl text-center  my-6 z-20'>Join us on Instagram <span className='underline'>@ShopWave</span></h1>
         <div className='flex px-10 my-10'>
           {instaPics && instaPics.map((item) => (
-            <img src={item} alt="pics.png" className='h-96 w-64 rounded-xl mx-4'  />
+            <img src={item} alt="pics.png" className='h-96 w-64 rounded-xl mx-4' />
           ))}
         </div>
       </div>

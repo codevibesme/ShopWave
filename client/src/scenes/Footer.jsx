@@ -11,7 +11,6 @@ const Footer = () => {
           <h2 className='text-lg font-normal mb-4 text-white'>Socially and environmentally progressive outdoor footwear</h2>
           <div className='text-xl text-white'>
             <IoLogoFacebook className='inline mx-2'/> <IoLogoInstagram className='inline mx-2'/> <IoLogoTwitter className='inline mx-2'/> <IoLogoWhatsapp  className='inline mx-2'/>
-
           </div>
         </div>
         <div className='flex flex-col w-64 mx-4'>
