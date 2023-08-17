@@ -6,7 +6,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   return (
     <nav className=' sticky top-0 bg-white flex text-black text-bold opacity-100  min-w-fit bg-white-600 pb-6 pt-4 px-10 shadow-md z-40 '>
-        <img src="assets/logo/shopwaveLogo.png" alt="logo" className='rounded-xl z-40 scale-125 hover:scale-150 h-16 duration-1000' onClick={()=>navigate("/")} />
+        <img src="/assets/logo/shopwaveLogo.png" alt="logo" className='rounded-xl z-40 scale-125 hover:scale-150 h-16 duration-1000' onClick={()=>navigate("/")} />
         <div className='flex flex-col md:flex-row my-4 md:my-0 md:mx-10 h-fit md:relative md:top-8 w-fit '>
             <p className='text-xl h-fit mx-3 cursor-pointer hover:scale-105 hover:text-green-950 '>Trending</p>
             <p className='text-xl h-fit mx-3 cursor-pointer hover:scale-105 hover:text-green-950'>New</p>

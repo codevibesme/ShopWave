@@ -1,6 +1,7 @@
 import React from 'react'
 import CartItem from '../components/CartItem'
 import { useSelector } from 'react-redux';
+import {useNavigate} from "react-router";
 const CartPage = () => {
   const  INR = Intl.NumberFormat("en-IN", {
     style: "currency",
@@ -8,8 +9,10 @@ const CartPage = () => {
   });
   let cartItems = useSelector((state) => state.cart.cartItems);
   const subTotal = useSelector((state)=>state.cart.subTotal);
+  const navigate = useNavigate();
   const test = () => {
     // dispatch(rSetSubTotal({subTotal:subTotal*20}));
+    navigate("/checkout/information");
   }
   return (
     <div className='px-10 min-h-screen min-w-screen py-14 flex flex-col justify-center'>
