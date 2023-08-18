@@ -16,6 +16,7 @@ const LoginPage = () => {
         if(!validateEmail) setIsEmailValid(false);
         const validatePassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/.test(password);
         if(!validatePassword) setIsPasswordValid(false);
+        if(!validateEmail || !validatePassword) return;
 
     }
     return (
@@ -37,7 +38,7 @@ const LoginPage = () => {
                     
                 </>)}
                 <p className="mb-4 underline hover:text-green-800 text-gray-400 cursor-pointer w-5/12 h-fit mx-auto">Forgot your password?</p>
-                <button type="submit" className="rounded-lg w-28 h-12 mb-4 mx-auto bg-gradient-to-r from bg-green-800 to bg-green-950 text-white text-xl hover:scale-105 hover:shadow-sm hover:shadow-green-800/60">
+                <button type="submit" className="rounded-lg w-28 h-12 mb-4 mx-auto bg-gradient-to-tr from-green-800 to-green-950 text-white text-xl hover:scale-105 hover:shadow-sm hover:shadow-green-800/60">
                     Sign in
                 </button>
                 <p className="mb-4 underline hover:text-green-800 text-gray-400 cursor-pointer w-fit h-fit mx-auto" onClick={()=>navigate("/register")}>Create Account</p>

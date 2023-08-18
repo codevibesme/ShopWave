@@ -18,7 +18,7 @@ const initialState = {
     ],
     subTotal: 28600,
     shipping: 0,
-    total: 0,
+    total: 28600,
 };
 
 export const cartSlice = createSlice({
@@ -51,11 +51,14 @@ export const cartSlice = createSlice({
             state.subTotal = state.subTotal - action.payload.item.quantity*action.payload.item.price;
             state.cartItems = [...state.cartItems.filter(item => item.name !== action.payload.item.name)];
         },
-        setSubTotal: (state, action) => {
-            state.subTotal = action.payload.subTotal;
+        setTotal: (state) => {
+            state.total = state.subTotal+state.shipping;
+        },
+        setShipping: (state, action) => {
+            state.shipping = action.payload.shipping;
         }
     }
 });
-export const { addItem, removeItem, setSubTotal, deleteItem } = cartSlice.actions;
+export const { addItem, removeItem, deleteItem, setTotal, setShipping } = cartSlice.actions;
 export default cartSlice.reducer;
 

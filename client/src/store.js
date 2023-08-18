@@ -1,7 +1,5 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import {
-    persistStore,
-    persistReducer,
     FLUSH,
     REHYDRATE,
     PAUSE,
@@ -10,11 +8,12 @@ import {
     REGISTER
 } from 'redux-persist';
 import cartReducer from "./slices/cartSlice";
+import shippingReducer from "./slices/shippingSlice";
 import storage from "redux-persist/lib/storage";
 import persistCombineReducers from "redux-persist/es/persistCombineReducers";
 
 const persistConfig = {key: "root", storage, version: 1};
-const persistedReducer = persistCombineReducers(persistConfig, {cart: cartReducer});
+const persistedReducer = persistCombineReducers(persistConfig, {cart: cartReducer, shipping: shippingReducer});
 export const store = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) => 

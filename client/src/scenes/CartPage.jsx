@@ -1,19 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CartItem from '../components/CartItem'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {useNavigate} from "react-router";
+import { setTotal } from '../slices/cartSlice';
 const CartPage = () => {
   const  INR = Intl.NumberFormat("en-IN", {
     style: "currency",
     currency: "INR",
   });
+  const dispatch = useDispatch();
+
   let cartItems = useSelector((state) => state.cart.cartItems);
   const subTotal = useSelector((state)=>state.cart.subTotal);
+  const name = useSelector((state) => state.shipping.name);
   const navigate = useNavigate();
   const test = () => {
-    // dispatch(rSetSubTotal({subTotal:subTotal*20}));
-    navigate("/checkout/information");
+    if(name)
+      navigate("/checkout/shipping");
+    else
+      navigate("/checkout/information");
   }
+  useEffect(() => {
+    dispatch(setTotal());
+  }, [subTotal])  //eslint-disable-line
   return (
     <div className='px-10 min-h-screen min-w-screen py-14 flex flex-col justify-center'>
         {cartItems.length === 0 && (
@@ -38,12 +47,12 @@ const CartPage = () => {
           ))}
           <hr className='border-gray-200 my-8'/>
           <div className='flex '>
-            <h1 className='text-end w-full text-lg me-3  '>Subtotal</h1>
+            <h1 className='text-end w-full text-lg me-3 '>Subtotal</h1>
             <h1 className='text-start text-lg text-green-950 font-normal'>{INR.format(subTotal)}</h1>
           </div>
           <h1 className='text-end text-sm font-light text-green-950 my-4'>Taxes and shipping calculated at checkout</h1>
           <div className='flex justify-end'>
-            <button className='text-2xl text-center text-white bg-gradient-to-r from bg-green-700 to bg-green-950 rounded-md h-12 w-56 px-4  hover:scale-105 hover:shadow-md hover:shadow-green-800/60' onClick={test}>Check out</button>
+            <button className='text-2xl text-center text-white bg-gradient-to-tr from-green-800 to-green-950 rounded-md h-12 w-56 px-4  hover:scale-105 hover:shadow-md hover:shadow-green-800/60' onClick={test}>Check out</button>
           </div>
         </>)}
     </div>

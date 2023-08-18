@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import {Country, State, City} from "country-state-city";
 import { useNavigate } from 'react-router';
+import { setName, setAddress as setShipAddress , setCountry as setShipCountry, setCity as setShipCity, setState as setShipState, setPhone as setShipPhone, setPincode as setShipPincode, setEmail as setShippingEmail } from '../slices/shippingSlice';
+import { useDispatch } from 'react-redux';
+import OrderDetails from '../components/OrderDetails';
 const InformationPage = () => {
     const navigate = useNavigate();
     const [isFirstNameValid, setIsFirstNameValid] = useState(true);
@@ -10,7 +13,9 @@ const InformationPage = () => {
     const [isStateValid, setIsStateValid] = useState(true);
     const [isCityValid, setIsCityValid] = useState(true);
     const [isPincodeValid, setIsPincodeValid] = useState(true);
-    
+    const [isPhoneValid, setIsPhoneValid] = useState(true);
+    const [isEmailValid, setIsEmailValid] = useState(true);
+
     const [country, setCountry] = useState('');
     const [state, setState] = useState('');
     const [city, setCity] = useState('');
@@ -20,11 +25,13 @@ const InformationPage = () => {
     const [lastName, setLastName] = useState('');
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
+    const [countryCode, setCountryCode] = useState('');
     const [pincode, setPincode] = useState('');
     const [phoneCode, setPhoneCode] = useState('');
+    const [email, setEmail] =useState('');
 
     const countryList = Country.getAllCountries();
-
+    const dispatch = useDispatch();
     const handleCountrySelect =  (e) => {
         const selectedCountry = JSON.parse(e.target.value);
         if(selectedCountry.select){
@@ -33,14 +40,16 @@ const InformationPage = () => {
             setState('');
             setCityList('');
             setCity('');
+            setCountryCode('');
             return;
         }
         console.log(selectedCountry);
         setCountry(selectedCountry.name);
         const states = State.getStatesOfCountry(selectedCountry.isoCode);
+        setCountryCode(selectedCountry.isoCode);
         console.log(states);
         setStateList(states);
-        setPhoneCode(selectedCountry.phoneCode);
+        setPhoneCode(selectedCountry.phonecode);
     }
 
     const handleStateChange = (e) => {
@@ -67,25 +76,59 @@ const InformationPage = () => {
     }
 
     const handleSubmit = (e) => {
+        let stopSubmit=0;
         e.preventDefault();
-        if(country === "select" || country === '')
+        if(country === "select" || country === ''){
             setIsCountryValid(false);
-        if(state === "select" || state === '')
+            stopSubmit=1;
+        }
+        if(state === "select" || state === ''){
             setIsStateValid(false);
-        if(city === "select" || city === '')
+            stopSubmit=1;
+        }
+        if(city === "select" || city === ''){
             setIsCityValid(false);
-        if(firstName === '')
+            stopSubmit=1;
+        }
+        if(firstName === ''){
             setIsFirstNameValid(false);
-        if(lastName === '')
+            stopSubmit=1;
+        }
+        if(lastName === ''){
             setIsLastNameValid(false);
-        if(address === '')
+            stopSubmit=1;
+        }
+        if(address === ''){
             setIsAddressValid(false);
-        if(pincode === '')
+            stopSubmit=1;
+        }
+        if(pincode === '' || /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(pincode) || /[a-z\A-Z]/.test(pincode) ){
             setIsPincodeValid(false);
+            stopSubmit=1;
+        }
+        const validateEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+        if(!validateEmail){
+            setIsEmailValid(false);  
+            stopSubmit=1;
+        }
+        if(phone.length !== 10 || /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(phone) || /[a-z\A-Z]/.test(phone) ||  phone === ''){
+            setIsPhoneValid(false);
+            stopSubmit=1;
+        }
+        if(stopSubmit) return;
+        dispatch(setName({name:`${firstName} ${lastName}`}));
+        dispatch(setShipAddress({address}));
+        dispatch(setShipCountry({country}));
+        dispatch(setShipState({state}));
+        dispatch(setShipCity({city}));
+        dispatch(setShipPhone({phone: `${phoneCode} ${phone}`}));
+        dispatch(setShippingEmail({email}));
+        dispatch(setShipPincode({pincode}));
+        navigate("/checkout/shipping");
     }
 
     return (
-        <div className='w-screen h-screen flex'>
+        <div className='min-h-screen w-full flex'>
             <div className='w-1/2 h-full p-10 flex flex-col'>
                 <h1 className='text-3xl text-green-950 font-light mb-3'>ShopWave</h1>
                 <h1 className='text-sm text-gray-500 mb-4 cursor-default'><span className='cursor-pointer text-blue-500' onClick={()=>navigate("/cart")}>Cart</span> &gt; <span className=' text-black'>Information</span> &gt; Shipping &gt; Payment</h1>
@@ -125,6 +168,35 @@ const InformationPage = () => {
                             <p className='text-gray-600 font-light text-xs h-fit w-fit text-red-700'>Enter Address</p>
                         }
                     </div>
+                    <div className='flex w-full relative justify-between'>
+                        {country && (
+                            <>
+                                <div className='flex flex-col  min-w-fit justify-center me-3 absolute left-4 top-8'>
+                                    <div className='flex w-full'>
+                                        <img className='me-2 h-8 w-8' src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${countryCode}.svg`} alt="flag" />
+                                        <div className='flex flex-col justify-center w-full'>
+                                            <p className='text-green-950 text-md w-fit'>{phoneCode}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='w-2/5'>
+                                    <p className='text-gray-600 font-light text-xs relative top-5 left-4 h-fit w-fit'>Phone</p>
+                                    <input onFocus={()=>setIsPhoneValid(true)} value={phone} onChange={(e)=>setPhone(e.target.value)} className='peer text-lg rounded-md h-12 w-full ps-20 pe-4 pt-4 border border-green-950 focus:outline-none'/>
+                                    {!isPhoneValid && 
+                                        <p className='text-gray-600 font-light text-xs h-fit w-fit text-red-700'>Enter valid Phone number</p>
+                                    }
+                                </div>
+                            </>
+                        )}
+                        <div className={`${country? ' w-2/4' : 'w-full'}`}>
+                            <p className='text-gray-600 font-light text-xs relative top-5 left-4 h-fit w-fit'>Email</p>
+                            <input onFocus={()=>setIsEmailValid(true)} value={email} onChange={(e)=>setEmail(e.target.value)} className='peer text-lg rounded-md h-12 w-full px-4 pt-4 border border-green-950 focus:outline-none'/>
+                            {!isEmailValid && 
+                                <p className='text-gray-600 font-light text-xs h-fit w-fit text-red-700'>Enter valid Email</p>
+                            }
+                        </div>
+                    </div>
+                        
                     <div className='flex w-full justify-between'>
                         <div className='w-fit'>
                             <p className='text-gray-600 font-light text-xs relative top-5 left-4 h-fit w-fit'>State</p>
@@ -160,11 +232,13 @@ const InformationPage = () => {
                     </div>
                     <div className='mt-12 flex justify-between'>
                         <p className='text-lg text-blue-600 underline cursor-pointer' onClick={()=>navigate("/cart")}>Return to cart</p>
-                        <button type="submit" className='text-white bg-gradient-to-r from bg-green-950 to bg-green-600 rounded-md h-12 w-fit px-4 hover:scale-105 hover:shadow-md hover:shadow-green-700/50'>Continue to Shipping</button>
+                        <button type="submit" className='text-white bg-gradient-to-tr from-green-800 to-green-950 rounded-md h-12 w-fit px-4 hover:scale-105 hover:shadow-md hover:shadow-green-700/50'>Continue to Shipping</button>
                     </div>
                 </form>
             </div>
-            <div className='w-1/2 h-full bg-gradient-to-r from bg-gray-200 to bg-stone-200'></div>
+            <div className='w-1/2 py-10 ps-10 pe-32 min-h-full bg-stone-100'>
+                <OrderDetails />
+            </div>
         </div>
     )
 }
