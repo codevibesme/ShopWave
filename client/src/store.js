@@ -9,11 +9,12 @@ import {
 } from 'redux-persist';
 import cartReducer from "./slices/cartSlice";
 import shippingReducer from "./slices/shippingSlice";
+import productReducer from "./slices/productSlice";
 import storage from "redux-persist/lib/storage";
 import persistCombineReducers from "redux-persist/es/persistCombineReducers";
 
 const persistConfig = {key: "root", storage, version: 1};
-const persistedReducer = persistCombineReducers(persistConfig, {cart: cartReducer, shipping: shippingReducer});
+const persistedReducer = persistCombineReducers(persistConfig, {cart: cartReducer, shipping: shippingReducer, product: productReducer});
 export const store = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) => 

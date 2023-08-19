@@ -6,41 +6,41 @@ const HomePage = () => {
   const  categories = [
     {
       name: "Sun",
-      img: "assets/sun.png"
+      img: "/assets/sun.png"
     },
     {
       name: "Rain",
-      img: "assets/rain.png"
+      img: "/assets/rain.png"
     },
     {
       name: "Snow",
-      img: "assets/snow.png"
+      img: "/assets/snow.png"
     },
     {
       name: "All weather",
-      img: "assets/allweather.png"
+      img: "/assets/allweather.png"
     },
   ];
   const  bestsellers = [
     {
       name: "Weekend Boot in Scarlet",
-      img: "assets/bestsellers_scarlet.png"
+      img: "/assets/bestsellers_scarlet.png"
     },
     {
       name: "Anyday Rain Boot in Black",
-      img: "assets/bestsellers_anydayrain.png"
+      img: "/assets/bestsellers_anydayrain.png"
     },
     {
       name: "Weekend Boot in Farrah",
-      img: "assets/bestsellers_farrah.png"
+      img: "/assets/bestsellers_farrah.png"
     },
     {
       name: "Terrus Clog in Sage",
-      img: "assets/bestsellers_sage_terrus.png"
+      img: "/assets/bestsellers_sage_terrus.png"
     },
   ];
-  const presses = ["assets/oprah.png", "assets/NYT.png", "assets/gear.png", "assets/outside.png"];
-  const instaPics = ["assets/instapic1.png", "assets/bestsellers_farrah.png", "assets/instapic3.png", "assets/instapic4.png",]
+  const presses = ["/assets/oprah.png", "/assets/NYT.png", "/assets/gear.png", "/assets/outside.png"];
+  const instaPics = ["/assets/instapic1.png", "/assets/bestsellers_farrah.png", "/assets/instapic3.png", "/assets/instapic4.png",]
   return (
     <div className='flex flex-col'>
       <div className='flex flex-col justify-center  bg-shop-all bg-center bg-cover min-h-screen min-w-screen ps-36 tracking-widest'>
@@ -79,7 +79,7 @@ const HomePage = () => {
           <span className='font-light'>CLAIRE</span>
         </div>
         <div className='flex flex-col justify-start h-fit'>
-          <img src="assets/review_pic.png" alt="review" className='scale-95 transition transform hover:animate-spin duration-5000' />
+          <img src="/assets/review_pic.png" alt="review" className='scale-95 transition transform hover:animate-spin duration-5000' />
         </div>
       </div>
       <div className='min-h-fit text-center flex flex-col z-20 justify-center'>

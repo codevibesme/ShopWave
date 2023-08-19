@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux';
-import { IoCheckbox } from 'react-icons/io5';
 import OrderDetails from '../components/OrderDetails';
 import { setShipping, setTotal } from '../slices/cartSlice';
 const ShippingPage = () => {

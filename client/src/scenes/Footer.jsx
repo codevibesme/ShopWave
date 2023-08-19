@@ -15,22 +15,22 @@ const Footer = () => {
         </div>
         <div className='flex flex-col w-64 mx-4'>
           <h1 className='text-xl text-white font-bold mb-2'>Our Shop</h1>
-          <h2 className='text-lg font-normal mb-2 hover:underline hover:text-white'>All Products</h2>
-          <h2 className='text-lg font-normal mb-2 hover:underline hover:text-white'>The Weekend Boot</h2>
-          <h2 className='text-lg font-normal mb-2 hover:underline hover:text-white'>The Winter Weekend Boot Z</h2>
-          <h2 className='text-lg font-normal mb-2 hover:underline hover:text-white'>The Terrus</h2>
-          <h2 className='text-lg font-normal mb-2 hover:underline hover:text-white'>Accessories</h2>
+          <h2 className='text-lg cursor-pointer font-normal mb-2 hover:underline hover:text-white'>All Products</h2>
+          <h2 className='text-lg cursor-pointer font-normal mb-2 hover:underline hover:text-white'>The Weekend Boot</h2>
+          <h2 className='text-lg cursor-pointer font-normal mb-2 hover:underline hover:text-white'>The Winter Weekend Boot Z</h2>
+          <h2 className='text-lg cursor-pointer font-normal mb-2 hover:underline hover:text-white'>The Terrus</h2>
+          <h2 className='text-lg cursor-pointer font-normal mb-2 hover:underline hover:text-white'>Accessories</h2>
         </div>
         <div className='flex flex-col w-64 mx-4'>
           <h1 className='text-xl text-white font-bold mb-2'>Help</h1>
-          <h2 className='text-lg font-normal mb-2 hover:underline hover:text-white'>Shipping Information</h2>
-          <h2 className='text-lg font-normal mb-2 hover:underline hover:text-white'>Refund Policy</h2>
-          <h2 className='text-lg font-normal mb-2 hover:underline hover:text-white'>Wear And Care FAQ</h2>
+          <h2 className='text-lg cursor-pointer font-normal mb-2 hover:underline hover:text-white'>Shipping Information</h2>
+          <h2 className='text-lg cursor-pointer font-normal mb-2 hover:underline hover:text-white'>Refund Policy</h2>
+          <h2 className='text-lg cursor-pointer font-normal mb-2 hover:underline hover:text-white'>Wear And Care FAQ</h2>
         </div>
         <div className='flex flex-col w-64 mx-4'>
           <h1 className='text-xl text-white font-bold mb-2'>About us</h1>
-          <h2 className='text-lg font-normal mb-2 hover:underline hover:text-white'>Values</h2>
-          <h2 className='text-lg font-normal mb-2 hover:underline hover:text-white'>Contact us</h2>
+          <h2 className='text-lg cursor-pointer font-normal mb-2 hover:underline hover:text-white'>Values</h2>
+          <h2 className='text-lg cursor-pointer font-normal mb-2 hover:underline hover:text-white'>Contact us</h2>
         </div>
       </div>
         <hr className=' border-1 shadow-sm border-gray-600 text-gray-400 ' />
