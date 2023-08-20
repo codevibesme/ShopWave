@@ -1,8 +1,9 @@
 import React from 'react'
 import CategoryCard from '../components/CategoryCard'
 import BestSellersCard from '../components/BestSellersCard';
-
+import {useNavigate} from "react-router";
 const HomePage = () => {
+  const navigate = useNavigate();
   const  categories = [
     {
       name: "Sun",
@@ -44,9 +45,9 @@ const HomePage = () => {
   return (
     <div className='flex flex-col'>
       <div className='flex flex-col justify-center  bg-shop-all bg-center bg-cover min-h-screen min-w-screen ps-36 tracking-widest'>
-        <h2 className='text-2xl text-center opacity-70  text-white '>ShopWave Outdoors</h2>
-        <h1 className='text-white text-4xl text-center my-4 '>Verastile. Sustainable. Oh so Comfy!</h1>
-        <button className='bg-white text-center  rounded-lg w-fit h-fit hover:opacity-90 hover:scale-105 text-black text-2xl p-2 mx-auto my-2'>Shop Now</button>
+        <h2 className='text-3xl text-center opacity-70  text-white '>ShopWave Outdoors</h2>
+        <h1 className='text-white text-5xl text-center my-4 '>Verastile. Sustainable. Oh so Comfy!</h1>
+        <button className='bg-white text-center  rounded-lg w-fit h-fit hover:opacity-90 hover:scale-105 text-black text-2xl p-2 mx-auto my-2' onClick={()=>navigate("/products/all")}>Shop Now</button>
       </div>
       <div className='flex flex-col justify-center min-h-screen '>
         <h1 className='px-60 text-green-950 text-5xl text-center  my-6 z-20'>Socially and environmentally progressive outdoor footwear that helps you #BeOutside</h1>

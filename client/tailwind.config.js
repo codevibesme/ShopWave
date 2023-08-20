@@ -12,6 +12,10 @@ module.exports = {
       backgroundImage: {
         'shop-all': "url('../public/assets/shopall.png')",
         'lookbook': "url('../public/assets/lookbook.png')",
+        'Bestsellers': "url('https://thesusoutdoors.com/cdn/shop/files/Beige_Collection_Page.png?v=1686860778&width=1500')",
+        'New-In': "url('https://thesusoutdoors.com/cdn/shop/files/New_In_Collection.png?v=1686861434&width=1500')",
+        'The-Weekend-Boot': "url('https://thesusoutdoors.com/cdn/shop/files/Bestsellers_Collection.png?v=1686861210&width=750')",
+        'The-Terrus': "url('https://thesusoutdoors.com/cdn/shop/files/Terrus_Collection.png?v=1686861571&width=1500')",
       },
       transitionDuration: {
         '10000': "10000ms",

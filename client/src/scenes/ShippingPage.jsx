@@ -60,7 +60,7 @@ const ShippingPage = () => {
                 </div>
                 <div className='mt-12 flex justify-between'>
                     <p className='text-lg text-blue-600 underline cursor-pointer' onClick={()=>navigate("/checkout/information")}>Return to Information</p>
-                    <button className='text-white bg-gradient-to-r from bg-green-950 to bg-green-600 rounded-md h-12 w-fit px-4 hover:scale-105 hover:shadow-md hover:shadow-green-700/50' onClick={() => navigate("/checkout/payment")}>Continue to Payment</button>
+                    <button className='text-white bg-gradient-to-tr from-green-800 to-green-950 rounded-md h-12 w-fit px-4 hover:scale-105 hover:shadow-md hover:shadow-green-700/50' onClick={() => navigate("/checkout/payment")}>Continue to Payment</button>
                 </div>
             </div>
             <div className='w-1/2 py-10 ps-10 pe-32 min-h-full bg-stone-100'>

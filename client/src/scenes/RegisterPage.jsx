@@ -50,7 +50,7 @@ const RegisterPage = () => {
                     </ul>
                     
                 </>)}
-                <button type="submit" className="rounded-lg w-28 h-12 mb-4  mx-auto bg-gradient-to-tr from-green-800 to-green-950 text-white text-xl hover:scale-105 hover:shadow-sm hover:shadow-green-800/60 mt-4">
+                <button type="submit" className="rounded-lg w-28 h-12 mb-4  mx-auto bg-gradient-to-tr from-green-800 to-green-950 text-white text-xl hover:scale-105 hover:shadow-md hover:shadow-green-800/60 mt-4">
                     Sign up
                 </button>
                 <p className="mb-4 underline hover:text-green-800 text-gray-400 cursor-pointer w-5/12 h-fit mx-auto" onClick={()=>navigate("/login")}>Already a member? Login</p>

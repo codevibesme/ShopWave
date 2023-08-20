@@ -117,7 +117,8 @@ const initialState = {
             quantity: 5,
             inStock: true
         },
-    ]
+    ],
+    size: 6,
 };
 export const productSlice = createSlice({
     name:"product",

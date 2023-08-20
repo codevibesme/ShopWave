@@ -37,11 +37,15 @@ const PaymentPage = () => {
                         <hr className='text-gray-400 shadow-md shadow-gray-500 border mb-2'/>
                         <div className='flex'>
                             <p className='text-md text-gray-500 me-10'>Method</p>
-                            {country === "India" ? <p className='text-green-950 text-md'>Domestic Standard Shipping: 4-10 business days · ₹500.00</p> 
+                            {country === "India" ? <p className='text-green-950 text-md'>Domestic Standard Shipping: 3-4 business days · ₹500.00</p> 
                                 : 
                             <p className='text-green-950 text-md'>International Standard Shipping: 4-10 business days · ₹3,400.00</p>}
                         </div>
                     </div>
+                </div>
+                <div className='mt-12 flex justify-between'>
+                    <p className='text-lg text-blue-600 underline cursor-pointer' onClick={()=>navigate("/checkout/information")}>Return to Shipping</p>
+                    <button className='text-white bg-gradient-to-tr from-green-800 to-green-950 rounded-md h-12 w-fit px-4 hover:scale-105 hover:shadow-md hover:shadow-green-700/50' onClick={() => navigate("/checkout/payment")}>Complete Order</button>
                 </div>
             </div>
             <div className='w-1/2 py-10 ps-10 pe-32 min-h-full bg-stone-100'>
