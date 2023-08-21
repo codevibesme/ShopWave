@@ -140,3 +140,6 @@ export const productSlice = createSlice({
 });
 export const {addProduct, removeProduct, updateProduct, setOutOfStock} = productSlice.actions;
 export default productSlice.reducer;
+
+
+
