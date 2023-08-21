@@ -51,7 +51,7 @@ const HomePage = () => {
       </div>
       <div className='flex flex-col justify-center min-h-screen '>
         <h1 className='px-60 text-green-950 text-5xl text-center  my-6 z-20'>Socially and environmentally progressive outdoor footwear that helps you #BeOutside</h1>
-        <div className='flex px-10 my-10'>
+        <div className='flex mx-auto w-fit my-10'>
           {categories && categories.map((item) => (
             <CategoryCard item={item} />
           ))}
@@ -66,7 +66,7 @@ const HomePage = () => {
       </div>
       <div className="min-h-screen text-center flex flex-col justify-center bg-gray-200 z-20">
         <h1 className='text-4xl text-center text-green-950 mx-auto font-medium mb-4'>ShopWave Bestsellers</h1>
-        <div className='flex mx-4 my-4'>
+        <div className='flex mx-auto my-4 w-fit'>
           {bestsellers && bestsellers.map((item) => (
             <BestSellersCard item={item}/>
           ))}
@@ -93,7 +93,7 @@ const HomePage = () => {
       </div>
       <div className='flex flex-col justify-center min-h-screen '>
         <h1 className='px-60 text-green-950 text-4xl text-center  my-6 z-20'>Join us on Instagram <span className='underline'>@ShopWave</span></h1>
-        <div className='flex px-10 my-10'>
+        <div className='flex w-fit mx-auto my-10'>
           {instaPics && instaPics.map((item) => (
             <img src={item} alt="pics.png" className='h-96 w-64 rounded-xl mx-4' />
           ))}
