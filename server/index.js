@@ -8,7 +8,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 import authRoutes from "./routes/auth.js";
-import verifyJWT from "./middleware/verifyJWT.js";
+import productRoutes from "./routes/product.js";
 
 dotenv.config();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({limit:"30mb", extended:true}))
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 app.use("/auth", authRoutes);
-
+app.use("/products", productRoutes);
 
 
 

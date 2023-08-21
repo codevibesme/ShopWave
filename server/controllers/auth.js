@@ -4,7 +4,7 @@ import User from "../models/User.js";
 
 export const register = async (req, res) => {
     try{
-        const {name, email, password } = await req.body;
+        const {name, email, password, role } = await req.body;
         const duplicateUser = await User.findOne({email}).exec();
         if(duplicateUser) return res.status(409).json({message: "email already exists"});
         const salt = await bcrypt.genSalt();
@@ -13,6 +13,7 @@ export const register = async (req, res) => {
             name,
             email,
             password: hashedPass,
+            role
         });
         const user = await registerUser.save();
         res.status(201).json({user});
@@ -20,8 +21,6 @@ export const register = async (req, res) => {
     } catch(err) {
         res.status(400).json({message: err.message});
     }
-
-
 };
 
 export const login = async (req, res) => {
@@ -33,6 +32,7 @@ export const login = async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password)
         if(!isMatch) return res.status(400).json({message: "Enter valid password!"});
         const token = jwt.sign({id: id}, process.env.ACCESS_TOKEN, );
+        if(!token) return res.status(403).json({message: "Unauthorized"});
         res.status(200).json({user, token});
     } catch(err) {
         res.status(403).json({message: err.message});
