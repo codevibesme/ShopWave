@@ -1,7 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-    products: [
-        {
+    products: [],
+    size: 0,
+};
+export const productSlice = createSlice({
+    name:"product",
+    initialState,
+    reducers:{
+        setProducts: (state, action) => {
+            state.products = [...action.payload.products];
+            state.size = state.products.length;
+        },
+        addProduct: (state, action) => {
+
+        },
+        removeProduct: (state, action) => {
+
+        },
+        updateProduct: (state, action) => {
+
+        },
+        setOutOfStock: (state, action) => {
+
+        }
+    } 
+});
+export const {addProduct, removeProduct, updateProduct, setOutOfStock, setProducts} = productSlice.actions;
+export default productSlice.reducer;
+
+
+
+/*
+{
             name:"Anyday Rain Boot in Black",
             thumbnail: "https://thesusoutdoors.com/cdn/shop/files/sustainable-rainboot_2cbf1511-cf01-462d-bf56-6187d957cac8.png?v=1686555865&width=1100",
             hoverThumbnail: "https://thesusoutdoors.com/cdn/shop/files/city-essential-rainboot_8b0e78cb-0fe3-4c7d-87d4-c0e9d9f83219.png?v=1688741727&width=1100",
@@ -117,29 +147,4 @@ const initialState = {
             quantity: 5,
             inStock: true
         },
-    ],
-    size: 6,
-};
-export const productSlice = createSlice({
-    name:"product",
-    initialState,
-    reducers:{
-        addProduct: (state, action) => {
-
-        },
-        removeProduct: (state, action) => {
-
-        },
-        updateProduct: (state, action) => {
-
-        },
-        setOutOfStock: (state, action) => {
-
-        }
-    } 
-});
-export const {addProduct, removeProduct, updateProduct, setOutOfStock} = productSlice.actions;
-export default productSlice.reducer;
-
-
-
+*/

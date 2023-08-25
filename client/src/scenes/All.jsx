@@ -6,7 +6,7 @@ const All = () => {
       <div className='p-10 pb-0 me-8 w-full h-fit'>
         <h1 className='text-5xl text-green-950 h-fit'> Shop All</h1>
       </div>
-      <ProductList />
+      <ProductList category={"all"} />
     </div>
   )
 }

@@ -5,7 +5,7 @@ const Weekend = () => {
   return (
     <div  className='w-full flex flex-col justify-between'> 
       <CategoryBanner category={"bg-The-Weekend-Boot"} dialogue={"Versatile. Sustainable. Oh So Comfy!"}/>
-      <ProductList />
+      <ProductList category={"Weekend"} />
     </div>
   )
 }
