@@ -1,6 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-    cartItems: null,
+    cartItems: [],
+    total: 0,
+    subTotal: 0,
+    shipping: 0,
 };
 
 export const cartSlice = createSlice({
@@ -13,13 +16,16 @@ export const cartSlice = createSlice({
         addItem : (state, action) => {
             const newItem = action.payload.newItem;
             const checkDup = state.cartItems.filter(item => item.name === newItem.name);
-            if(checkDup){
+            if(checkDup.length!==0 && checkDup[0].quantity){
                 checkDup[0].quantity+=1;
                 state.cartItems = [...state.cartItems.map(item => item.name === newItem.name ? checkDup[0] : item)];
             }
-            else
-                state.cartItems = [...state.cartItems, action.payload.newItem];
+            else{
+                newItem.quantity=1;
+                state.cartItems = [...state.cartItems, newItem];
+            }
             state.subTotal += newItem.price;
+            state.total = state.subTotal;
         },
         removeItem: (state, action) => {
             const delItem = action.payload.item;
@@ -31,10 +37,12 @@ export const cartSlice = createSlice({
             } else {
                 state.cartItems = [...state.cartItems.filter(item => item.name !== delItem.name)];
             }
+            state.total = state.subTotal;
         },
         deleteItem: (state, action) => {
             state.subTotal = state.subTotal - action.payload.item.quantity*action.payload.item.price;
             state.cartItems = [...state.cartItems.filter(item => item.name !== action.payload.item.name)];
+            state.total = state.subTotal;
         },
         setSubTotal: (state, action) => {
             state.subTotal = action.payload.subTotal;
@@ -45,10 +53,17 @@ export const cartSlice = createSlice({
         },
         setShipping: (state, action) => {
             state.shipping = action.payload.shipping;
+            state.total = state.subTotal + action.payload.shipping;
+        },
+        resetCart: (state) => {
+            state.cartItems=[];
+            state.shipping=0;
+            state.subTotal=0;
+            state.total=0;
         }
     }
 });
-export const { addItem, removeItem, deleteItem, setTotal, setShipping, setCart, setSubTotal } = cartSlice.actions;
+export const { addItem, removeItem, deleteItem, setTotal, setShipping, setCart, setSubTotal, resetCart } = cartSlice.actions;
 export default cartSlice.reducer;
 
 /*

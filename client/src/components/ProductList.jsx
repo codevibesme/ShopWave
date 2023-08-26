@@ -5,7 +5,6 @@ import { setProducts } from '../slices/productSlice';
 
 const ProductList = ({category}) => {
     const dispatch = useDispatch();
-
     const productList = useSelector(state => state.product.products);
     const size = useSelector((state) => state.product.size);
 
@@ -45,7 +44,7 @@ const ProductList = ({category}) => {
                         </div>
                     </div>
                     <div className='flex flex-wrap w-full min-h-screen'>
-                        {productList.map(product => <Product product={product}/>)}
+                        {productList.map(product => <Product product={product} key={product.name}/>)}
                     </div>
                 </>
             )}

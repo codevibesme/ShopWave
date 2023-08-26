@@ -37,7 +37,17 @@ export const shippingSlice = createSlice({
         setPincode: (state, action) => {
             state.pincode = action.payload.pincode;
         },
+        resetShipping: (state) => {
+            state.name="";
+            state.address="" ;
+            state.state="";
+            state.country="";
+            state.city="";
+            state.phone="";
+            state.email="";
+            state.pincode="";
+        }
     }
 });
-export const {setName, setAddress, setState, setCity, setCountry, setPhone, setPincode, setEmail} = shippingSlice.actions;
+export const {setName, setAddress, setState, setCity, setCountry, setPhone, setPincode, setEmail, resetShipping} = shippingSlice.actions;
 export default shippingSlice.reducer;

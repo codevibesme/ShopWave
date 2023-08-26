@@ -12,9 +12,6 @@ const CartItem = ({item}) => {
   const [quantity, setQuantity] = useState(item.quantity);
 
   const handleIncrease = async() => {
-    const q = quantity;
-    setQuantity(q+1);
-    dispatch(addItem({newItem: item}));
     try{
       const response = await fetch("http://localhost:8000/cart/add", {
         method: "POST",
@@ -28,24 +25,54 @@ const CartItem = ({item}) => {
     } catch(err) {
       console.log({error: err.message});
     }
+    const q = quantity;
+    setQuantity(q+1);
+    dispatch(addItem({newItem: item}));
   }
 
-  const handleDecrease = () => {
+  const handleDecrease = async () => {
+    try{
+      const response = await fetch("http://localhost:8000/cart/remove", {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({user_id: user._id, prod_id: item.id})
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch(err) {
+      console.log({error: err.message});
+    }
     const q = quantity;
     setQuantity(q-1);
     dispatch(removeItem({item}));
   }
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
+    try{
+      const response = await fetch("http://localhost:8000/cart/delete", {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({user_id: user._id, prod_id: item.id})
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch(err) {
+      console.log({error: err.message});
+    }
     dispatch(deleteItem({item}));
   }
   return (
     <div className='flex justify-start w-full h-fit mt-6 mb-3'>
       <div className='w-1/2 flex'>
-        <img src={item.thumbnail} alt="item" className='me-3 h-44 ' />
+        <img src={item.thumbnail} alt="item" className='me-8 h-44 ' />
         <div className='flex flex-col'>
           <p className='text-lg text-green-950 '>{item.name}</p>
           <p className='text-md text-green-900 mb-2 font-light'>{INR.format(item.price)}</p>
+          <p className='text-md text-green-900 mb-2 font-light'>Size: {item.size}</p>
         </div>
       </div>
       <div className="w-1/4 flex" >

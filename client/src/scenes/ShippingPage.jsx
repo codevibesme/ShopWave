@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux';
 import OrderDetails from '../components/OrderDetails';
 import { setShipping, setTotal } from '../slices/cartSlice';
+import updateCart from '../functions/updateCart';
 const ShippingPage = () => {
     const navigate = useNavigate();
     const name = useSelector((state) => state.shipping.name);
@@ -15,15 +16,22 @@ const ShippingPage = () => {
     const pincode = useSelector((state) => state.shipping.pincode);
 
     const shippingCost = country === "India" ? 500 : 3400;
-
+    const Total = useSelector(state => state.cart.total);
+    const subTotal = useSelector(state => state.cart.subTotal);
+    const shipping = useSelector(state=> state.cart.shipping);
+    const user = useSelector(state=>state.auth.user);
     const dispatch = useDispatch();
-
+    const proceedPayment = async () => {
+        const cart = {user_id: user._id, Total, subTotal, shipping};
+        await updateCart(cart);
+        navigate("/checkout/payment")
+    }
     useEffect(() => {
         dispatch(setShipping({shipping: shippingCost}));
         dispatch(setTotal());
     }, []) //eslint-disable-line
     return (
-        <div className='w-full h-screen flex'>
+        <div className='w-full min-h-fit flex'>
             <div className='w-1/2 h-full p-10 flex flex-col'>
                 <h1 className='text-3xl text-green-950 font-light mb-3'>ShopWave</h1>
                 <h1 className='text-sm text-gray-500 mb-4 cursor-default'><span className='cursor-pointer text-blue-500' onClick={()=>navigate("/cart")}>Cart</span> &gt; <span onClick={()=>navigate("/checkout/information")} className='cursor-pointer text-blue-500'>Information</span> &gt; <span className='text-black'>Shipping</span> &gt; Payment</h1>
@@ -60,7 +68,7 @@ const ShippingPage = () => {
                 </div>
                 <div className='mt-12 flex justify-between'>
                     <p className='text-lg text-blue-600 underline cursor-pointer' onClick={()=>navigate("/checkout/information")}>Return to Information</p>
-                    <button className='text-white bg-gradient-to-tr from-green-800 to-green-950 rounded-md h-12 w-fit px-4 hover:scale-105 hover:shadow-md hover:shadow-green-700/50' onClick={() => navigate("/checkout/payment")}>Continue to Payment</button>
+                    <button className='text-white bg-gradient-to-tr from-green-800 to-green-950 rounded-md h-12 w-fit px-4 hover:scale-105 hover:shadow-md hover:shadow-green-700/50' onClick={proceedPayment}>Continue to Payment</button>
                 </div>
             </div>
             <div className='w-1/2 py-10 ps-10 pe-32 min-h-full bg-stone-100'>

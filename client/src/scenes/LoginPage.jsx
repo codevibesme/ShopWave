@@ -3,6 +3,8 @@ import { useNavigate } from "react-router";
 import {useSelector, useDispatch } from "react-redux";
 import { setIsLoggedIn, setToken, setUser } from "../slices/authSlice";
 import { IoPersonOutline } from "react-icons/io5";
+import { resetShipping } from "../slices/shippingSlice";
+import { resetCart } from "../slices/cartSlice";
 const LoginPage = () => {
     const [isEmailValid, setIsEmailValid] = useState(true);
     const [isPasswordValid, setIsPasswordValid] = useState(true);
@@ -47,6 +49,8 @@ const LoginPage = () => {
         dispatch(setIsLoggedIn({status:false}));
         dispatch(setUser({user:null}));
         dispatch(setToken({token:null}));
+        dispatch(resetShipping());
+        dispatch(resetCart());
     }
     return (
         <>

@@ -46,4 +46,43 @@ export const addItem = async (req, res) => {
     } catch(err){
         res.status(400).json({message: err.message});
     }
+};
+export const removeItem = async (req, res) => {
+    try{
+        const {user_id, prod_id} = await req.body;
+        let cart = await Cart.findOne({user_id}).exec();
+        const cartProduct = cart.products.get(prod_id);
+        if(cartProduct.quantity === 1)
+            cart.products.delete(prod_id);
+        else 
+            cart.products.get(prod_id).quantity-=1;
+        cart.subTotal-=cart.products.get(prod_id).price;
+        cart.Total-=cart.products.get(prod_id).price;
+        cart = await Cart.findOneAndUpdate({user_id}, cart, {returnOriginal: false});
+        res.status(200).json({cart});
+    } catch(err){
+        console.log({message: err.message});
+    }
+}
+export const deleteItem = async (req, res) => {
+    try{
+        const {user_id, prod_id} = await req.body;
+        let cart = await Cart.findOne({user_id}).exec();
+        cart.subTotal-=(cart.products.get(prod_id).price*cart.products.get(prod_id).quantity);
+        cart.Total-=(cart.products.get(prod_id).price*cart.products.get(prod_id).quantity);
+        cart.products.delete(prod_id);
+        cart = await Cart.findOneAndUpdate({user_id}, cart, {returnOriginal: false});
+        res.status(200).json({cart});
+    } catch(err){
+        console.log({message: err.message});
+    }
+}
+export const updateCart = async(req, res) => {
+    try{
+        const {user_id, Total, subTotal, shipping} = await req.body;
+        const cart = await Cart.findOneAndUpdate({user_id}, {Total, subTotal, shipping}, {returnOriginal: false});
+        res.status(200).json({cart});
+    } catch(err){
+        console.log({error: err.message});
+    }
 }

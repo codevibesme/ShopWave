@@ -14,7 +14,7 @@ const PaymentPage = () => {
     const pincode = useSelector((state) => state.shipping.pincode);
 
     return (
-        <div className='w-screen h-screen flex'>
+        <div className='w-screen min-h-fit flex'>
             <div className='w-1/2 h-full p-10 flex flex-col'>
                 <h1 className='text-3xl text-green-950 font-light mb-3'>ShopWave</h1>
                 <h1 className='text-sm text-gray-500 mb-4 cursor-default'><span className='cursor-pointer text-blue-500' onClick={()=>navigate("/cart")}>Cart</span> &gt; <span onClick={()=>navigate("/checkout/information")} className='cursor-pointer text-blue-500'>Information</span> &gt; <span className='cursor-pointer text-blue-500' onClick={() => navigate('/checkout/shipping')}>Shipping</span> &gt; <span className='text-black'>Payment</span></h1>

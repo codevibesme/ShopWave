@@ -11,7 +11,7 @@ const OrderDetails = () => {
     return (
         <div className='flex flex-col mb-6'>
             {orderItems.length!==0 && (
-                orderItems.map( (item) => <OrderItem item={item} />)
+                orderItems.map( (item) => <OrderItem item={item} key={item.name} />)
             )}
             <hr className='text-gray-400 shadow-md shadow-gray-500 border mb-6'/>
             <div className='flex justify-between mb-6'>
