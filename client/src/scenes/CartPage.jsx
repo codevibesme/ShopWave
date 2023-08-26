@@ -2,18 +2,35 @@ import React, { useEffect } from 'react'
 import CartItem from '../components/CartItem'
 import { useDispatch, useSelector } from 'react-redux';
 import {useNavigate} from "react-router";
-import { setTotal } from '../slices/cartSlice';
+import { setCart, setSubTotal, setTotal } from '../slices/cartSlice';
 const CartPage = () => {
   const  INR = Intl.NumberFormat("en-IN", {
     style: "currency",
     currency: "INR",
   });
   const dispatch = useDispatch();
-
+  const user = useSelector((state)=>state.auth.user);
   let cartItems = useSelector((state) => state.cart.cartItems);
   const subTotal = useSelector((state)=>state.cart.subTotal);
   const name = useSelector((state) => state.shipping.name);
   const navigate = useNavigate();
+  const fetchCart = async () => {
+    try{
+      const response = await fetch("http://localhost:8000/cart/", {
+        method:"POST",
+        headers:{
+          "Content-Type": "application/json",
+        },
+        body:JSON.stringify({user_id: user._id})
+      });
+      const  {cart} = await response.json();
+      const products = cart[0].products;
+      dispatch(setCart({products}));
+      dispatch(setSubTotal({subTotal: cart[0].subTotal}));
+    } catch(err){
+      console.log({error: err.message});
+    }
+  }
   const test = () => {
     if(name)
       navigate("/checkout/shipping");
@@ -21,17 +38,17 @@ const CartPage = () => {
       navigate("/checkout/information");
   }
   useEffect(() => {
-    dispatch(setTotal());
-  }, [subTotal])  //eslint-disable-line
+    fetchCart();
+  }, [])  //eslint-disable-line
   return (
     <div className='px-10 min-h-screen min-w-screen py-14 flex flex-col justify-center'>
-        {cartItems.length === 0 && (
+        {!cartItems && (
           <div className='flex flex-col justify-center'>
             <h1 className='text-green-950 font-medium text-4xl text-center'>Cart is Empty!</h1>
             <h1 className='hover:text-green-950 cursor-pointer font-light mt-4 underline text-gray-500 text-lg text-center'>Browse Items to Add to Cart</h1>
           </div>
         )}
-        {cartItems.length!==0 && (<>
+        {cartItems && (<>
           <div className='flex justify-between'>
               <h1 className='text-green-950 text-4xl'>Your Cart</h1>
               <h2 className='text-gray-400 text-xl underline hover:text-green-950 cursor-pointer'>Conintue shopping</h2>
@@ -42,9 +59,14 @@ const CartPage = () => {
               <h6 className='w-1/4 text-gray-400 text-sm text-start'>TOTAL</h6>
           </div>
           <hr className='border-gray-200 mt-4 mb-8'/>
-          {cartItems.map(item => (
-              <CartItem key={item.name} item={item} />
-          ))}
+          <button onClick={()=>{console.log(cartItems)}}>Print</button>
+          {/* {Object.entries(cartItems).map( value => {
+            console.log(value[1]);
+            return(
+              <CartItem key={value[1].name} item={value[1]} />
+            )
+          })} */}
+          {cartItems.map(item => <CartItem key={item.name} item={item} />)}
           <hr className='border-gray-200 my-8'/>
           <div className='flex '>
             <h1 className='text-end w-full text-lg me-3 '>Subtotal</h1>

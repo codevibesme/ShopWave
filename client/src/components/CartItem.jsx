@@ -1,19 +1,33 @@
 import React, { useState } from 'react'
 import { IoTrashOutline } from 'react-icons/io5';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItem, removeItem, deleteItem } from "../slices/cartSlice";
 const CartItem = ({item}) => {
   const  INR = Intl.NumberFormat("en-IN", {
     style: "currency",
     currency: "INR",
   });
+  const user = useSelector(state => state.auth.user);
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(item.quantity);
 
-  const handleIncrease = () => {
+  const handleIncrease = async() => {
     const q = quantity;
     setQuantity(q+1);
     dispatch(addItem({newItem: item}));
+    try{
+      const response = await fetch("http://localhost:8000/cart/add", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({user_id: user._id, product: item}),
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch(err) {
+      console.log({error: err.message});
+    }
   }
 
   const handleDecrease = () => {
@@ -28,7 +42,7 @@ const CartItem = ({item}) => {
   return (
     <div className='flex justify-start w-full h-fit mt-6 mb-3'>
       <div className='w-1/2 flex'>
-        <img src={item.img} alt="item" className='me-3 h-44 ' />
+        <img src={item.thumbnail} alt="item" className='me-3 h-44 ' />
         <div className='flex flex-col'>
           <p className='text-lg text-green-950 '>{item.name}</p>
           <p className='text-md text-green-900 mb-2 font-light'>{INR.format(item.price)}</p>

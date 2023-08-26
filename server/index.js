@@ -9,6 +9,7 @@ import { fileURLToPath } from "url";
 
 import authRoutes from "./routes/auth.js";
 import productRoutes from "./routes/product.js";
+import cartRoutes from "./routes/cart.js";
 
 dotenv.config();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -24,7 +25,7 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 app.use("/auth", authRoutes);
 app.use("/products", productRoutes);
-
+app.use("/cart", cartRoutes);
 
 
 mongoose.connect(process.env.MONGO_URL, {

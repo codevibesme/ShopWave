@@ -43,7 +43,7 @@ export const getProductByCategory = async (req, res) => {
     try{
         const {category} = await req.params;
         const allProducts = await Product.find({});
-        const products = await allProducts.filter(item => item.category.has(category))
+        const products = allProducts.filter(item => item.category.has(category))
         res.status(200).json({products});
     } catch(err){
         res.status(400).json({message: err.message});
