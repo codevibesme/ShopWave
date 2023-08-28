@@ -5,6 +5,7 @@ import { setIsLoggedIn, setToken, setUser } from "../slices/authSlice";
 import { IoPersonOutline } from "react-icons/io5";
 import { resetShipping } from "../slices/shippingSlice";
 import { resetCart } from "../slices/cartSlice";
+
 const LoginPage = () => {
     const [isEmailValid, setIsEmailValid] = useState(true);
     const [isPasswordValid, setIsPasswordValid] = useState(true);
@@ -17,7 +18,8 @@ const LoginPage = () => {
     const dispatch = useDispatch();
 
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
-    const user = useSelector(state => state.auth.user) ;
+    const user = useSelector(state => state.auth.user);
+
     const handleLogin = async (e) => {
         e.preventDefault();
         const validateEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
@@ -45,6 +47,7 @@ const LoginPage = () => {
         dispatch(setIsLoggedIn({status: true}));
         navigate("/");
     }
+
     const handleLogout = () => {
         dispatch(setIsLoggedIn({status:false}));
         dispatch(setUser({user:null}));
@@ -52,6 +55,7 @@ const LoginPage = () => {
         dispatch(resetShipping());
         dispatch(resetCart());
     }
+
     return (
         <>
             {isLoggedIn && (
@@ -75,6 +79,7 @@ const LoginPage = () => {
                     </div>
                 </div>
             )}
+            
             {!isLoggedIn && (
                 <div className="min-h-fit min-w-screen flex flex-col">
                     <h1 className="text-4xl text-green-950 mx-auto mt-4 mb-6">Login</h1>
@@ -103,7 +108,6 @@ const LoginPage = () => {
                 </div>
             )}
         </>
-        
     );
 }
 export default LoginPage;

@@ -12,6 +12,28 @@ const PaymentPage = () => {
     const state = useSelector((state) => state.shipping.state);
     const city = useSelector((state) => state.shipping.city);
     const pincode = useSelector((state) => state.shipping.pincode);
+    const cartItems = useSelector((state) => state.cart.cartItems);
+
+    const handlePayment = async () => {
+        // console.log("checkout");
+        try{
+            
+            const response = await fetch("http://localhost:8000/create-checkout-session", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body : JSON.stringify({
+                    cartItems,
+                    country,
+                })
+            });
+            const { url } = await response.json();
+            if(url) window.location = url;
+        } catch(err){
+            console.log({error: err.message});
+        }
+    }
 
     return (
         <div className='w-screen min-h-fit flex'>
@@ -45,7 +67,7 @@ const PaymentPage = () => {
                 </div>
                 <div className='mt-12 flex justify-between'>
                     <p className='text-lg text-blue-600 underline cursor-pointer' onClick={()=>navigate("/checkout/information")}>Return to Shipping</p>
-                    <button className='text-white bg-gradient-to-tr from-green-800 to-green-950 rounded-md h-12 w-fit px-4 hover:scale-105 hover:shadow-md hover:shadow-green-700/50' onClick={() => navigate("/checkout/payment")}>Complete Order</button>
+                    <button className='text-white bg-gradient-to-tr from-green-800 to-green-950 rounded-md h-12 w-fit px-4 hover:scale-105 hover:shadow-md hover:shadow-green-700/50' onClick={handlePayment}>Complete Order</button>
                 </div>
             </div>
             <div className='w-1/2 py-10 ps-10 pe-32 min-h-full bg-stone-100'>

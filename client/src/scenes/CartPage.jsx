@@ -2,13 +2,15 @@ import React, { useEffect } from 'react'
 import CartItem from '../components/CartItem'
 import { useDispatch, useSelector } from 'react-redux';
 import {useNavigate} from "react-router";
-import { setCart, setSubTotal } from '../slices/cartSlice';
+import { setCart, setCartId, setSubTotal } from '../slices/cartSlice';
 import updateCart from '../functions/updateCart';
+
 const CartPage = () => {
   const  INR = Intl.NumberFormat("en-IN", {
     style: "currency",
     currency: "INR",
   });
+
   const dispatch = useDispatch();
   const user = useSelector((state)=>state.auth.user);
   let cartItems = useSelector((state) => state.cart.cartItems);
@@ -17,6 +19,7 @@ const CartPage = () => {
   const shipping = useSelector((state) => state.cart.shipping);
   const name = useSelector((state) => state.shipping.name);
   const navigate = useNavigate();
+  
   const fetchCart = async () => {
     try{
       const response = await fetch("http://localhost:8000/cart/", {
@@ -28,12 +31,14 @@ const CartPage = () => {
       });
       const  {cart} = await response.json();
       const products = cart[0].products;
+      dispatch(setCartId({id: cart[0]._id}));
       dispatch(setCart({products}));
       dispatch(setSubTotal({subTotal: cart[0].subTotal}));
     } catch(err){
       console.log({error: err.message});
     }
   }
+
   const test = async () => {
     const cart = {user: user._id, Total, subTotal, shipping};
     await updateCart(cart);
@@ -42,9 +47,11 @@ const CartPage = () => {
     else
       navigate("/checkout/information");
   }
+
   useEffect(() => {
     fetchCart();
   }, [])  //eslint-disable-line
+
   return (
     <div className='px-10 min-h-screen min-w-screen py-14 flex flex-col justify-center'>
         {cartItems.length===0 && (

@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 const initialState = {
     cartItems: [],
+    cartId: "",
     total: 0,
     subTotal: 0,
     shipping: 0,
@@ -12,6 +14,9 @@ export const cartSlice = createSlice({
     reducers: {
         setCart: (state, action) => {
             state.cartItems = Object.entries(action.payload.products).map(value => value[1]);
+        },
+        setCartId: (state, action) => {
+            state.cartId = action.payload.id;
         },
         addItem : (state, action) => {
             const newItem = action.payload.newItem;
@@ -63,26 +68,5 @@ export const cartSlice = createSlice({
         }
     }
 });
-export const { addItem, removeItem, deleteItem, setTotal, setShipping, setCart, setSubTotal, resetCart } = cartSlice.actions;
+export const { addItem, removeItem, deleteItem, setTotal, setShipping, setCart, setSubTotal, resetCart, setCartId } = cartSlice.actions;
 export default cartSlice.reducer;
-
-/*
-{
-          name: "The Terrus in Sage",
-          img: "assets/cart_boot_1.png",
-          quantity: 1,
-          price: 11800,
-          
-        },
-        {
-          name: "The Weekend Boot Farrah",
-          img: "assets/cart_boot_2.png",
-          quantity: 1,
-          price: 16800,
-          
-        },
-    ],
-    subTotal: 28600,
-    shipping: 0,
-    total: 28600,
-*/

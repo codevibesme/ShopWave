@@ -26,10 +26,12 @@ const ShippingPage = () => {
         await updateCart(cart);
         navigate("/checkout/payment")
     }
+    
     useEffect(() => {
         dispatch(setShipping({shipping: shippingCost}));
         dispatch(setTotal());
     }, []) //eslint-disable-line
+
     return (
         <div className='w-full min-h-fit flex'>
             <div className='w-1/2 h-full p-10 flex flex-col'>

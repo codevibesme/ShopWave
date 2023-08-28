@@ -13,6 +13,10 @@ import Bestsellers from "./scenes/Bestsellers";
 import Weekend from "./scenes/Weekend";
 import Terrus from "./scenes/Terrus";
 import All from "./scenes/All";
+import SuccessPage from "./scenes/SuccessPage";
+import CancelPage from "./scenes/CancelPage";
+
+
 function App() {
   return (
     <div className="h-full min-w-full">
@@ -20,6 +24,8 @@ function App() {
           <Navbar />
           <Routes>
             <Route exact path="/" element = {<HomePage />} />
+            <Route exact path="/success" element ={<SuccessPage />} />
+            <Route exact path="/cancel" element ={<CancelPage />} />
             <Route exact path="/login" element = {<LoginPage />} />
             <Route exact path="/register" element = {<RegisterPage />} />
             <Route exact path="/cart" element={<CartPage />} />

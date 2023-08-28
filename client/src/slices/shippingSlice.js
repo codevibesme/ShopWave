@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 const initialState = {
     name: "",
     address:"" ,
@@ -9,6 +10,7 @@ const initialState = {
     email:"",
     pincode:"",
 }
+
 export const shippingSlice = createSlice({
     name:"shipping",
     initialState,
@@ -49,5 +51,5 @@ export const shippingSlice = createSlice({
         }
     }
 });
-export const {setName, setAddress, setState, setCity, setCountry, setPhone, setPincode, setEmail, resetShipping} = shippingSlice.actions;
+export const { setName, setAddress, setState, setCity, setCountry, setPhone, setPincode, setEmail, resetShipping } = shippingSlice.actions;
 export default shippingSlice.reducer;
