@@ -78,8 +78,8 @@ export const payment = async (req, res) => {
             mode: 'payment',
             shipping_options,
             line_items,
-            success_url: "http://localhost:3000/success",
-            cancel_url: "http://localhost:3000/cancel"
+            success_url: "https://shopwavesoham.netlify.app/success",
+            cancel_url: "https://shopwavesoham.netlify.app/cancel"
         });
         res.status(200).json({url: session.url});
     } catch(err){
