@@ -18,7 +18,7 @@ const PaymentPage = () => {
         // console.log("checkout");
         try{
             
-            const response = await fetch("http://localhost:8000/create-checkout-session", {
+            const response = await fetch("https://shopwave-xmkp.onrender.com/create-checkout-session", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

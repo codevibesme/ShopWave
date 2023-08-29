@@ -33,7 +33,7 @@ const Product = ({product}) => {
     };
 
     try{
-      const response = await fetch("http://localhost:8000/cart/add", {
+      const response = await fetch("https://shopwave-xmkp.onrender.com/cart/add", {
         method:"POST",
         headers:{
           "Content-type":"application/json",

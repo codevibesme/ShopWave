@@ -28,7 +28,7 @@ const LoginPage = () => {
         if(!validatePassword) setIsPasswordValid(false);
         if(!validateEmail || !validatePassword) return;
         const resBody = JSON.stringify({email, password});
-        const response = await fetch("http://localhost:8000/auth/login", {
+        const response = await fetch("https://shopwave-xmkp.onrender.com/auth/login", {
             method: "POST",
             headers:{
                 "Content-Type": "application/json",

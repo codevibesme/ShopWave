@@ -13,7 +13,7 @@ const CartItem = ({item}) => {
 
   const handleIncrease = async() => {
     try{
-      const response = await fetch("http://localhost:8000/cart/add", {
+      const response = await fetch("https://shopwave-xmkp.onrender.com/cart/add", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -32,7 +32,7 @@ const CartItem = ({item}) => {
 
   const handleDecrease = async () => {
     try{
-      const response = await fetch("http://localhost:8000/cart/remove", {
+      const response = await fetch("https://shopwave-xmkp.onrender.com/cart/remove", {
         method: "DELETE",
         headers: {
           "Content-type": "application/json",
@@ -51,7 +51,7 @@ const CartItem = ({item}) => {
 
   const handleDelete = async () => {
     try{
-      const response = await fetch("http://localhost:8000/cart/delete", {
+      const response = await fetch("https://shopwave-xmkp.onrender.com/cart/delete", {
         method: "DELETE",
         headers: {
           "Content-type": "application/json",

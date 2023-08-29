@@ -1,5 +1,5 @@
 const updateCart = async (cart) => {
-    await fetch("http://localhost:8000/cart/update", {
+    await fetch("https://shopwave-xmkp.onrender.com/cart/update", {
         method:"PATCH",
         headers: {
             "Content-type": "application/json"

@@ -9,7 +9,7 @@ const ProductList = ({category}) => {
     const size = useSelector((state) => state.product.size);
 
     const fetchProducts = async () => {
-        const response = await fetch(`http://localhost:8000/products/${category}`, {
+        const response = await fetch(`https://shopwave-xmkp.onrender.com/products/${category}`, {
             method:"GET",
         });
         const {products} = await response.json();

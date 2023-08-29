@@ -22,7 +22,7 @@ const CartPage = () => {
   
   const fetchCart = async () => {
     try{
-      const response = await fetch("http://localhost:8000/cart/", {
+      const response = await fetch("https://shopwave-xmkp.onrender.com/cart/", {
         method:"POST",
         headers:{
           "Content-Type": "application/json",
